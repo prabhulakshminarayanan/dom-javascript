@@ -1,27 +1,96 @@
+<!DOCTYPE html>
 <html>
-    <head>
-     <title> this is dom</title>
-     <style>
-        .prabhu {
-         background-color: black;
-         color: green;
-         border:2px solid orange;
-         border-radius: 10px;
-         font-size:36px
+
+<head>
+    <title>This is dom</title>
+    <style>
+        .nav-link {
+            padding: 20px;
+            text-decoration: none;
+            color: orange;
         }
 
-     </style>
-    </head>
-    <body>
-        <h1 id="text">Hello World</h1>
-        <button onclick='changeText()'>Click</button>
+        .active {
+            font-weight: bolder;
+            color: black;
+        }
 
-    </body>
+    </style>
+</head>
+
+<body>
+
+    <p id = "status">Status: OFF</p>
+    <button onclick="toggleStatus()">Change Status</button> 
+
+    <form id = "myForm">
+        <label for = "username">UserName:</label>
+        <input type = "text" id = "username">
+        <p id = "error" style="color: red; display: none;">Username is required and cannot be empty!</p>
+        <button type = "button" onclick="validateForm()">Submit</button>
+
+    </form>
+
+    <nav>
+        <a href="#home" id = "homelink" class="nav-link" onclick="highlight('homelink')">Home</a>
+        <a href="#about" id = "aboutlink" class="nav-link" onclick="highlight('aboutlink')">About</a>
+        <a href="#contact" id = "contactlink" class="nav-link" onclick="highlight('contactlink')">Contact</a>
+    </nav>
+
+
+
+
     <script>
-        function changeText(){
-            document.getElementById('text').textContent="Hi Hello , how are you"
+
+        function toggleStatus() {
+            const statusElement = document.getElementById("status");
+        
+            if(statusElement.textContent === "Status: OFF") {
+                statusElement.textContent = "Status: ON";
+            } else {
+                statusElement.textContent = "Status: OFF"
+            }
         }
+
+        function validateForm() {
+            const userInput = document.getElementById("username");
+            const errorElement = document.getElementById("error");
+
+            // check if the username is empty 
+            if(userInput.value === ""){
+                errorElement.style.display = "block"
+            } 
+            else {
+                errorElement.style.display = "none";
+                alert("Form is successfully submitted")
+            }
+
+        }
+
+        function highlight(venkat) {
+
+            document.getElementById("homelink").classList.remove('active');
+            document.getElementById("aboutlink").classList.remove('active');
+            document.getElementById("contactlink").classList.remove('active');
+
+            document.getElementById(venkat).classList.add("active");
+
+
+        }
+
+        // using tagname
+        // function highlight(venkat) {
+        //     const links = document.getElementsByTagName("a");
+
+        //     for(let link of links){
+        //         link.classList.remove("active")
+        //     }
+        //     event.target.classList.add("active")
+
+        // }   
+
     </script>
 
+</body>
 
 </html>
